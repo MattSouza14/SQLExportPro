@@ -1,2 +1,5 @@
 .env
 *.secret
+*.log
+__pycache__/
+outputs/
