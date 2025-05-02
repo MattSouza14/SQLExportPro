@@ -19,32 +19,7 @@ def export_to_excel():
         conn = get_db_connection()
         
         query = """
-SELECT 
-  FORMAT(TbMde.DtMde, 'dd/MM/yyyy') AS 'Data do Registro', 
-  TbUne.NmUne AS 'Empresa', 
-  TbDep.NmDep AS 'Banco', 
-  CONVERT(DECIMAL(15,2), TbTuf.VrTuf) AS 'Valor',
-  TbFrn.NmFrn AS 'Fornecedor',
-  TbTop.NmTop AS 'Tipo de Operação',
-  TbUsr.NmUsr AS 'Usuário'
-FROM TbMde
-JOIN TbUne ON TbMde.CdUne = TbUne.CdUne  
-JOIN TbDep ON TbMde.CdDep = TbDep.CdDep  
-JOIN TbTop ON TbMde.CdTop = TbTop.CdTop 
-JOIN TbTuf ON TbMde.CdMde = TbTuf.CdMde
-JOIN TbFrn ON TbFrn.CdFrn = TbTuf.CdFrn
-JOIN TbUsr ON TbMde.CdUsr = TbUsr.CdUsr 
-WHERE 
-  YEAR(TbMde.DtMde) = 2025 
-  AND MONTH(TbMde.DtMde) = 3 
-  AND TbTop.CdTop IN (64, 940)
-  AND EXISTS (
-    SELECT 1 FROM TbLgh 
-    WHERE TbLgh.CdUsr = TbMde.CdUsr 
-    AND TbLgh.TpLgh = 1  
-  )
-ORDER BY 
-  TbMde.DtMde ASC;
+Aqui dentro vai a query (Retirada a original por motivos de segurança)
 """
         df = pd.read_sql(query, conn)
         
