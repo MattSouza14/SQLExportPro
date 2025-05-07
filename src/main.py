@@ -19,6 +19,7 @@ def export_to_excel():
         conn = get_db_connection()
         
         query = """
+Aqui dentro vai a query (Retirada a original por motivos de segurança)
 
 """
         df = pd.read_sql(query, conn)
