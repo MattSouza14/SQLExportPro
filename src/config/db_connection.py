@@ -6,11 +6,7 @@ import os
 load_dotenv()
 
 def get_db_connection():
-    """
-    Estabelece conexão com o SQL Server usando autenticação do Windows
-    Retorna: Objeto de conexão pyodbc
-    Levanta: ConnectionError em caso de falha
-    """
+  
     try:
         conn = pyodbc.connect(
         f"DRIVER={{{os.getenv('SQL_DRIVER')}}};"
