@@ -56,12 +56,30 @@
                 </select>
             </div>
         </form>
-        {% if table_html %}
+        <!-- {% if table_html %}
             <h3>Resultado da Query:</h3>
             <div class="table-container">
                 {{ table_html|safe }}
             </div>
         {% endif %}
+    </div> -->
+    <div id="resultModal" class="modal">
+    <div class="modal-content">
+        <span class="close-button" onclick="closeModal()">×</span>
+        <h2>Resultado da Consulta</h2>
+        <div id="resultTableContainer">
+            {{ table_html | safe }}
+        </div>
+            <form method="post">
+                <input type="hidden" name="sql_query" value="{{ sql_query }}">
+                <input type="hidden" name="action" value="save_query">
+                <div style="margin-top: 10px;">
+                    <label for="query_name">Nome da Query:</label>
+                    <input type="text" name="query_name" id="query_name" required>
+                    <button type="submit" class="btn btn-save">Salvar Query</button>
+                </div>
+            </form>
+        </div>
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.13/codemirror.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.13/mode/sql/sql.min.js"></script>

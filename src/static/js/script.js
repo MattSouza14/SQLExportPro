@@ -20,3 +20,14 @@
             cm.showHint({completeSingle: false});
         }
     });
+
+    function closeModal() {
+    document.getElementById("resultModal").style.display = "none";
+}
+
+window.addEventListener("DOMContentLoaded", () => {
+    const resultTable = document.getElementById("resultTableContainer");
+    if (resultTable && resultTable.innerHTML.trim() !== "") {
+        document.getElementById("resultModal").style.display = "block";
+    }
+});
