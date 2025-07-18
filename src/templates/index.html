@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Exportar Consulta SQL</title>
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.13/codemirror.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.13/theme/eclipse.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.13/addon/hint/show-hint.min.css">
+</head>
+<body>
+    <div class="container">
+        <h2>Exportar Consulta SQL</h2>
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                <ul>
+                {% for message in messages %}
+                    <li>{{ message }}</li>
+                {% endfor %}
+                </ul>
+            {% endif %}
+        {% endwith %}
+        <form method="post">
+            <label for="sql_query">SQL Query:</label>
+            <textarea name="sql_query" id="sql_query" rows="15">{{ sql_query or default_sql_query }}</textarea>
+
+            <div class="input-grid">
+                <div class="input-group">
+                    <label for="filename_base">Nome do arquivo (sem extensão):</label>
+                    <input type="text" name="filename_base" id="filename_base" value="{{ filename_base or '_' + now }}">
+                </div>
+                <div class="input-group">
+                    <label for="sheet_name">Nome da planilha/sheet:</label>
+                    <input type="text" name="sheet_name" id="sheet_name" value="{{ sheet_name or '' }}">
+                </div>
+                <div class="input-group">
+                    <label for="worksheet">Nome da worksheet:</label>
+                    <input type="text" name="worksheet" id="worksheet" value="{{ worksheet or '' }}">
+                </div>
+                <div class="input-group">
+                    <label for="query_name">Nome para salvar a query:</label>
+                    <input type="text" name="query_name" id="query_name" value="{{ query_name or '' }}">
+                </div>
+            </div>
+            
+            <div class="button-group">
+                <button type="submit" name="action" value="run_query">Executar Query</button>
+                <button type="submit" name="action" value="export">Exportar</button>
+                <button type="submit" name="action" value="save_query">Salvar Query</button>
+                <label for="format" style="margin-left: auto; margin-bottom: 0;">Escolha o formato:</label>
+                <select name="format" id="format">
+                    <option value="excel">Excel (.xlsx)</option>
+                    <option value="pdf">PDF</option>
+                    <option value="csv">CSV (.xls)</option>
+                    <option value="powerbi">Power BI (CSV)</option>
+                </select>
+            </div>
+        </form>
+        {% if table_html %}
+            <h3>Resultado da Query:</h3>
+            <div class="table-container">
+                {{ table_html|safe }}
+            </div>
+        {% endif %}
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.13/codemirror.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.13/mode/sql/sql.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.13/addon/hint/show-hint.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.13/addon/hint/sql-hint.min.js"></script>
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>
