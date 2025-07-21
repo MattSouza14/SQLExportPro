@@ -91,7 +91,7 @@ def run_query(query):
     conn = None
     try:
         conn = get_db_connection()
-        df = pd.read_sql(query, conn)
+        df = pd.read_sql(query, conn).fillna("")
         return df
     except Exception as e:
         logging.error(f"Erro ao executar a consulta: {str(e)}")
